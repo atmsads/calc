@@ -1,1012 +1,1462 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>기브 계산기</title>
     <style>
-        .container {
-            max-width: 1800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        .calculators-container {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
-            margin-top: 20px;
-        }
-        .calculator {
-            padding: 25px;
-            border-radius: 10px;
-            background-color: #fff;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        .input-sections-container {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-        .input-section {
-            flex: 1;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-        .input-group {
-            margin: 15px 0;
-        }
-        label {
-            display: inline-block;
-            width: 150px;
-        }
-        input {
-            padding: 5px;
-            width: 150px;
-        }
-        .results-container {
-            display: flex;
-            gap: 20px;
-        }
-        .main-results, .fee-details {
-            flex: 1;
-            padding: 20px;
-            border-radius: 5px;
-        }
-        .main-results {
-            background-color: #f5f5f5;
-        }
-        .fee-details {
-            background-color: #e8f4f8;
-        }
-        .result-row {
-            margin: 10px 0;
-        }
-        .result-value {
-            font-weight: bold;
-            color: #2c3e50;
-            display: inline-block;
-            width: 120px;
-            text-align: right;
-        }
-        .rate {
-            color: #7f8c8d;
-            margin-left: 10px;
-            font-size: 0.9em;
-        }
-        .total-row {
-            border-top: 2px solid #ddd;
-            margin-top: 15px;
-            padding-top: 15px;
-        }
-        .calculator-title {
-            text-align: center;
-            color: #2c3e50;
-            margin-bottom: 20px;
-            padding: 10px;
-            border-bottom: 2px solid;
-        }
-        .calculator:nth-child(1) {
-            background-color: #f8f9fa;
-            border: 2px solid #e9ecef;
-        }
-        .calculator:nth-child(2) {
-            background-color: #f1f8ff;
-            border: 2px solid #d1e9ff;
-        }
-        .calculator:nth-child(3) {
-            background-color: #f8f8ff;
-            border: 2px solid #e3e3ff;
-        }
-        .calculator:nth-child(4) {
-            background-color: #fff8f8;
-            border: 2px solid #ffe3e3;
-        }
-        .calculator:nth-child(1) .calculator-title { border-color: #e9ecef; }
-        .calculator:nth-child(2) .calculator-title { border-color: #d1e9ff; }
-        .calculator:nth-child(3) .calculator-title { border-color: #e3e3ff; }
-        .calculator:nth-child(4) .calculator-title { border-color: #ffe3e3; }
-        .section-title {
-            margin-top: 0;
-            margin-bottom: 15px;
-            color: #2c3e50;
-            font-size: 1.2em;
-        }
-        .calculation-row {
-            margin-top: 15px;
-            color: #666;
-            padding-top: 15px;
-        }
-        .calculation-section {
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid #ddd;
-        }
-        .calculation {
-            color: #888;
-            font-size: 0.9em;
-            margin-left: 10px;
-            white-space: nowrap;
-        }
-        .section-subtitle {
-            color: #666;
-            font-size: 1em;
-            margin-bottom: 15px;
-        }
-        .resources-section {
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid #ddd;
-        }
-        .resources-container {
-            display: flex;
-            gap: 20px;
-        }
-        .resource-item {
-            flex: 1;
-        }
-        .calculator-description {
-            font-size: 0.85em;
-            color: #666;
-            margin: 10px 0;
-            line-height: 1.4;
-            padding: 0 15px;
-            text-align: left;
-        }
-        .marketing-budget-section {
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid #ddd;
-        }
+      .container {
+          max-width: 1800px;
+          margin: 0 auto;
+          padding: 20px;
+      }
+      .calculators-container {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 30px;
+          margin-top: 20px;
+      }
+      .calculator {
+          padding: 25px;
+          border-radius: 10px;
+          background-color: #fff;
+          box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      }
+      .input-sections-container {
+          display: flex;
+          gap: 20px;
+          margin-bottom: 20px;
+      }
+      .input-section {
+          flex: 1;
+          padding: 20px;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+      }
+      .input-group {
+          margin: 15px 0;
+      }
+      label {
+          display: inline-block;
+          width: 150px;
+      }
+      input {
+          padding: 5px;
+          width: 150px;
+      }
+      .results-container {
+          display: flex;
+          gap: 20px;
+      }
+      .main-results, .fee-details {
+          flex: 1;
+          padding: 20px;
+          border-radius: 5px;
+      }
+      .main-results {
+          background-color: #f5f5f5;
+      }
+      .fee-details {
+          background-color: #e8f4f8;
+      }
+      .result-row {
+          margin: 10px 0;
+      }
+      .result-value {
+          font-weight: bold;
+          color: #2c3e50;
+          display: inline-block;
+          width: 120px;
+          text-align: right;
+      }
+      .rate {
+          color: #7f8c8d;
+          margin-left: 10px;
+          font-size: 0.9em;
+      }
+      .total-row {
+          border-top: 2px solid #ddd;
+          margin-top: 15px;
+          padding-top: 15px;
+      }
+      .calculator-title {
+          text-align: center;
+          color: #2c3e50;
+          margin-bottom: 20px;
+          padding: 10px;
+          border-bottom: 2px solid;
+      }
+      .calculator:nth-child(1) {
+          background-color: #f8f9fa;
+          border: 2px solid #e9ecef;
+      }
+      .calculator:nth-child(2) {
+          background-color: #f1f8ff;
+          border: 2px solid #d1e9ff;
+      }
+      .calculator:nth-child(3) {
+          background-color: #f8f8ff;
+          border: 2px solid #e3e3ff;
+      }
+      .calculator:nth-child(4) {
+          background-color: #fff8f8;
+          border: 2px solid #ffe3e3;
+      }
+      .calculator:nth-child(1) .calculator-title { border-color: #e9ecef; }
+      .calculator:nth-child(2) .calculator-title { border-color: #d1e9ff; }
+      .calculator:nth-child(3) .calculator-title { border-color: #e3e3ff; }
+      .calculator:nth-child(4) .calculator-title { border-color: #ffe3e3; }
+      .section-title {
+          margin-top: 0;
+          margin-bottom: 15px;
+          color: #2c3e50;
+          font-size: 1.2em;
+      }
+      .calculation-row {
+          margin-top: 15px;
+          color: #666;
+          padding-top: 15px;
+      }
+      .calculation-section {
+          margin-top: 20px;
+          padding-top: 20px;
+          border-top: 1px solid #ddd;
+      }
+      .calculation {
+          color: #888;
+          font-size: 0.9em;
+          margin-left: 10px;
+          white-space: nowrap;
+      }
+      .section-subtitle {
+          color: #666;
+          font-size: 1em;
+          margin-bottom: 15px;
+      }
+      .resources-budget-container {
+          display: flex;
+          gap: 20px;
+          margin-top: 20px;
+      }
+      .budget-section {
+          flex: 1;
+      }
+      .resources-section {
+          margin-top: 20px;
+          padding: 15px;
+          background-color: #f8f9fa;
+          border-radius: 5px;
+          border: 1px solid #ddd;
+      }
+      .resources-container {
+          display: flex;
+          gap: 20px;
+      }
+      .resource-item {
+          flex: 1;
+      }
+      .calculator-description {
+          font-size: 0.85em;
+          color: #666;
+          margin: 10px 0;
+          line-height: 1.4;
+          padding: 0 15px;
+          text-align: left;
+      }
+      .additional-info-container {
+          display: flex;
+          gap: 20px;
+          margin-top: 20px;
+      }
+      .marketing-budget-section,
+      .required-product-section {
+          flex: 1;
+          padding: 15px;
+          background-color: #f8f9fa;
+          border-radius: 5px;
+          border: 1px solid #ddd;
+      }
+      .marketing-budget-section {
+          margin-top: 0;
+          padding-top: 15px;
+          border-top: none;
+      }
+      .budget-product-container {
+          display: flex;
+          gap: 20px;
+      }
+      .marketing-budget-section,
+      .required-product-section {
+          flex: 1;
+      }
+      .reference-data {
+          font-size: 0.85em;
+          color: #666;
+          font-weight: normal;
+          margin-left: 10px;
+      }
 
-        /* 모바일 최적화 스타일 추가 */
-        @media screen and (max-width: 768px) {
-            .container {
-                padding: 10px;
-            }
-            
-            .calculators-container {
-                grid-template-columns: 1fr;  /* 모바일에서는 1열로 변경 */
-                gap: 15px;
-            }
+      /* 모바일 최적화 스타일 추가 */
+      @media screen and (max-width: 768px) {
+          .container {
+              padding: 10px;
+          }
 
-            .calculator {
-                padding: 15px;
-            }
+          .calculators-container {
+              grid-template-columns: 1fr;  /* 모바일에서는 1열로 변경 */
+              gap: 15px;
+          }
 
-            .calculator-title {
-                font-size: 1.2em;
-                padding: 8px;
-            }
+          .calculator {
+              padding: 15px;
+          }
 
-            .calculator-description {
-                font-size: 0.8em;
-                padding: 0 8px;
-            }
+          .calculator-title {
+              font-size: 1.2em;
+              padding: 8px;
+          }
 
-            .input-sections-container {
-                flex-direction: column;
-                gap: 15px;
-            }
+          .calculator-description {
+              font-size: 0.8em;
+              padding: 0 8px;
+          }
 
-            .input-section {
-                padding: 15px;
-            }
+          .input-sections-container {
+              flex-direction: column;
+              gap: 15px;
+          }
 
-            .input-group {
-                margin: 10px 0;
-                display: flex;
-                flex-wrap: wrap;
-                align-items: center;
-                gap: 5px;
-            }
+          .input-section {
+              padding: 15px;
+          }
 
-            .input-group label {
-                width: 110px;
-                font-size: 0.9em;
-            }
+          .input-group {
+              margin: 10px 0;
+              display: flex;
+              flex-wrap: wrap;
+              align-items: center;
+              gap: 5px;
+          }
 
-            .input-group input {
-                width: calc(100% - 150px);
-                min-width: 100px;
-            }
+          .input-group label {
+              width: 110px;
+              font-size: 0.9em;
+          }
 
-            .results-container {
-                flex-direction: column;
-                gap: 15px;
-            }
+          .input-group input {
+              width: calc(100% - 150px);
+              min-width: 100px;
+          }
 
-            .main-results, .fee-details {
-                padding: 15px;
-            }
+          .results-container {
+              flex-direction: column;
+              gap: 15px;
+          }
 
-            .section-title {
-                font-size: 1.1em;
-                margin-bottom: 10px;
-            }
+          .main-results, .fee-details {
+              padding: 15px;
+          }
 
-            .result-row {
-                margin: 8px 0;
-                display: flex;
-                flex-wrap: wrap;
-                align-items: center;
-                gap: 5px;
-            }
+          .section-title {
+              font-size: 1.1em;
+              margin-bottom: 10px;
+          }
 
-            .result-row label {
-                width: 120px;
-                font-size: 0.9em;
-            }
+          .result-row {
+              margin: 8px 0;
+              display: flex;
+              flex-wrap: wrap;
+              align-items: center;
+              gap: 5px;
+          }
 
-            .result-value {
-                width: auto;
-                min-width: 80px;
-                font-size: 0.95em;
-            }
+          .result-row label {
+              width: 120px;
+              font-size: 0.9em;
+          }
 
-            .rate {
-                font-size: 0.85em;
-            }
+          .result-value {
+              width: auto;
+              min-width: 80px;
+              font-size: 0.95em;
+          }
 
-            .resources-container {
-                flex-direction: column;
-                gap: 10px;
-            }
+          .rate {
+              font-size: 0.85em;
+          }
 
-            .resource-item {
-                display: flex;
-                align-items: center;
-                gap: 8px;
-                padding: 8px;
-                background-color: rgba(255,255,255,0.7);
-                border-radius: 4px;
-            }
+          .resources-container {
+              flex-direction: column;
+              gap: 10px;
+          }
 
-            .calculation {
-                font-size: 0.8em;
-            }
+          .resource-item {
+              display: flex;
+              align-items: center;
+              gap: 8px;
+              padding: 8px;
+              background-color: rgba(255,255,255,0.7);
+              border-radius: 4px;
+          }
 
-            .marketing-budget-section {
-                margin-top: 15px;
-                padding-top: 15px;
-            }
+          .calculation {
+              font-size: 0.8em;
+          }
 
-            h1 {
-                font-size: 1.5em;
-                margin: 10px 0;
-            }
+          .marketing-budget-section {
+              margin-top: 15px;
+              padding-top: 15px;
+          }
 
-            h2 {
-                font-size: 1.3em;
-            }
+          h1 {
+              font-size: 1.5em;
+              margin: 10px 0;
+          }
 
-            h3 {
-                font-size: 1.1em;
-            }
-        }
+          h2 {
+              font-size: 1.3em;
+          }
+
+          h3 {
+              font-size: 1.1em;
+          }
+
+          .budget-product-container {
+              flex-direction: column;
+              gap: 15px;
+          }
+
+          .resources-budget-container {
+              flex-direction: column;
+          }
+
+          .additional-info-container {
+              flex-direction: column;
+              gap: 15px;
+          }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <h1>기브 계산기</h1>
-        
-        <div class="calculators-container">
-            <!-- 계산기 A -->
-            <div class="calculator">
-                <h2 class="calculator-title">마케팅 무한 작동 계산기</h2>
-                <p class="calculator-description">
-                    콘텐츠 제작 역량이 괜찮은 팀에게 마케팅을 의뢰하려고 하니 30만원 정도의 예산이 필요했습니다. 그래서 마케팅비 5%가 30만원이 될 수 있는 최소 미션수를 산출했습니다.
-                </p>
-                <div class="input-sections-container">
-                    <div class="input-section">
-                        <h3>기본 단가 입력</h3>
-                        <div class="input-group">
-                            <label for="pricePerClick1">클릭당 단가:</label>
-                            <input type="text" id="pricePerClick1" name="pricePerClick" value="35">
-                            <span>원</span>
-                        </div>
-                        <div class="input-group">
-                            <label for="pricePerPoint1">포인트 단가:</label>
-                            <input type="text" id="pricePerPoint1" name="pricePerPoint" value="10">
-                            <span>원</span>
-                        </div>
-                        <div class="input-group">
-                            <label for="pricePerTicket1">티켓 단가:</label>
-                            <input type="text" id="pricePerTicket1" name="pricePerTicket" value="5">
-                            <span>원</span>
-                        </div>
-                        <div class="input-group">
-                            <label for="expectedClicks1">예상 미션수:</label>
-                            <input type="text" id="expectedClicks1" name="expectedClicks" value="170,000">
-                            <span>회</span>
-                        </div>
-                    </div>
-                    <div class="input-section">
-                        <h3>수수료 비율 입력</h3>
-                        <div class="input-group">
-                            <label for="managementFee1">판관비:</label>
-                            <input type="text" id="managementFee1" name="managementFee" value="10">
-                            <span>%</span>
-                        </div>
-                        <div class="input-group">
-                            <label for="marketingFee1">마케팅비:</label>
-                            <input type="text" id="marketingFee1" name="marketingFee" value="5">
-                            <span>%</span>
-                        </div>
-                        <div class="input-group">
-                            <label for="marketCompensation1">시작 보상:</label>
-                            <input type="text" id="marketCompensation1" name="marketCompensation" value="5">
-                            <span>%</span>
-                        </div>
-                        <div class="input-group">
-                            <label for="agencyFee1">대행사수수료:</label>
-                            <input type="text" id="agencyFee1" name="agencyFee" value="15">
-                            <span>%</span>
-                        </div>
-                    </div>
+      <h1>기브 계산기</h1>
+
+      <div class="calculators-container">
+        <!-- 계산기 A -->
+        <div class="calculator">
+          <h2 class="calculator-title">마케팅 무한 작동 계산기</h2>
+          <p class="calculator-description">
+            콘텐츠 제작 역량이 괜찮은 팀에게 마케팅을 의뢰하려고 하니 30만원
+            정도의 예산이 필요했습니다. 그래서 마케팅비 5%가 30만원이 될 수 있는
+            최소 미션수를 산출했습니다.
+          </p>
+          <div class="input-sections-container">
+            <div class="input-section">
+              <h3>기본 단가 입력</h3>
+              <div class="input-group">
+                <label for="pricePerClick1">클릭당 단가:</label>
+                <input
+                  type="text"
+                  id="pricePerClick1"
+                  name="pricePerClick"
+                  value="35"
+                />
+                <span>원</span>
+              </div>
+              <div class="input-group">
+                <label for="pricePerPoint1">포인트 단가:</label>
+                <input
+                  type="text"
+                  id="pricePerPoint1"
+                  name="pricePerPoint"
+                  value="10"
+                />
+                <span>원</span>
+              </div>
+              <div class="input-group">
+                <label for="pricePerTicket1">티켓 단가:</label>
+                <input
+                  type="text"
+                  id="pricePerTicket1"
+                  name="pricePerTicket"
+                  value="5"
+                />
+                <span>원</span>
+              </div>
+              <div class="input-group">
+                <label for="expectedClicks1">예상 미션수:</label>
+                <input
+                  type="text"
+                  id="expectedClicks1"
+                  name="expectedClicks"
+                  value="170,000"
+                />
+                <span>회</span>
+              </div>
+            </div>
+            <div class="input-section">
+              <h3>수수료 비율 입력</h3>
+              <div class="input-group">
+                <label for="managementFee1">판관비:</label>
+                <input
+                  type="text"
+                  id="managementFee1"
+                  name="managementFee"
+                  value="10"
+                />
+                <span>%</span>
+              </div>
+              <div class="input-group">
+                <label for="marketingFee1">마케팅비:</label>
+                <input
+                  type="text"
+                  id="marketingFee1"
+                  name="marketingFee"
+                  value="5"
+                />
+                <span>%</span>
+              </div>
+              <div class="input-group">
+                <label for="marketCompensation1">시작 보상:</label>
+                <input
+                  type="text"
+                  id="marketCompensation1"
+                  name="marketCompensation"
+                  value="5"
+                />
+                <span>%</span>
+              </div>
+              <div class="input-group">
+                <label for="agencyFee1">대행사수수료:</label>
+                <input
+                  type="text"
+                  id="agencyFee1"
+                  name="agencyFee"
+                  value="15"
+                />
+                <span>%</span>
+              </div>
+            </div>
+          </div>
+          <div class="result-section">
+            <h2>계산 결과</h2>
+            <div class="results-container">
+              <div class="main-results">
+                <h3 class="section-title">주요 결과</h3>
+                <div class="result-row">
+                  <label>총 매출:</label>
+                  <span class="result-value" id="totalRevenue1">0</span>원
                 </div>
-                <div class="result-section">
-                    <h2>계산 결과</h2>
-                    <div class="results-container">
-                        <div class="main-results">
-                            <h3 class="section-title">주요 결과</h3>
-                            <div class="result-row">
-                                <label>총 매출:</label>
-                                <span class="result-value" id="totalRevenue1">0</span>원
-                            </div>
-                            <div class="result-row">
-                                <label>총 지출:</label>
-                                <span class="result-value" id="totalExpenses1">0</span>원
-                                <span class="rate">(<span id="totalExpenseRate1">0</span>%)</span>
-                            </div>
-                            <div class="result-row total-row">
-                                <label>순익:</label>
-                                <span class="result-value" id="netProfit1">0</span>원
-                                <span class="rate">(<span id="netProfitRate1">0</span>%)</span>
-                            </div>
-                        </div>
-
-                        <div class="fee-details">
-                            <h3 class="section-title">지출 상세</h3>
-                            <div class="result-row">
-                                <label>포인트 총비용:</label>
-                                <span class="result-value" id="totalPointCost1">0</span>원
-                                <span class="rate">(<span id="pointCostRate1">0</span>%)</span>
-                            </div>
-                            <div class="result-row">
-                                <label>티켓 총비용:</label>
-                                <span class="result-value" id="totalTicketCost1">0</span>원
-                                <span class="rate">(<span id="ticketCostRate1">0</span>%)</span>
-                            </div>
-                            <div class="result-row">
-                                <label>판관비:</label>
-                                <span class="result-value" id="totalManagementFee1">0</span>원
-                                <span class="rate">(<span id="managementFeeRate1">0</span>%)</span>
-                            </div>
-                            <div class="result-row">
-                                <label>마케팅비:</label>
-                                <span class="result-value" id="totalMarketingFee1">0</span>원
-                                <span class="rate">(<span id="marketingFeeRate1">0</span>%)</span>
-                            </div>
-                            <div class="result-row">
-                                <label>시작 보상:</label>
-                                <span class="result-value" id="totalMarketCompensation1">0</span>원
-                                <span class="rate">(<span id="marketCompensationRate1">0</span>%)</span>
-                            </div>
-                            <div class="result-row">
-                                <label>대행사수수료:</label>
-                                <span class="result-value" id="totalAgencyFee1">0</span>원
-                                <span class="rate">(<span id="agencyFeeRate1">0</span>%)</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="resources-section">
-                        <h3 class="section-title">필요 자원</h3>
-                        <div class="resources-container">
-                            <div class="resource-item">
-                                <label>필요 DAU:</label>
-                                <span class="result-value" id="requiredDau1">0</span>명
-                                <span class="calculation">(예상클릭수÷4)</span>
-                            </div>
-                            <div class="resource-item">
-                                <label>필요 유저:</label>
-                                <span class="result-value" id="requiredUsers1">0</span>명
-                                <span class="calculation">(예상클릭수×70%)</span>
-                            </div>
-                            <div class="resource-item">
-                                <label>필요 업체수:</label>
-                                <span class="result-value" id="requiredCompanies1">0</span>개
-                                <span class="calculation">(예상클릭수÷100)</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="marketing-budget-section">
-                        <h3 class="section-title">유저 확보를 위한 마케팅 예산</h3>
-                        <div class="input-group">
-                            <label for="costPerSignup1">회원가입당 단가:</label>
-                            <input type="text" id="costPerSignup1" name="costPerSignup" value="3,000">
-                            <span>원</span>
-                        </div>
-                        <div class="result-row">
-                            <label>필요 마케팅 비용:</label>
-                            <span class="result-value" id="requiredMarketingBudget1">0</span>원
-                            <span class="calculation">(회원가입당 단가×필요유저)</span>
-                        </div>
-                    </div>
+                <div class="result-row">
+                  <label>총 지출:</label>
+                  <span class="result-value" id="totalExpenses1">0</span>원
+                  <span class="rate"
+                    >(<span id="totalExpenseRate1">0</span>%)</span
+                  >
                 </div>
+                <div class="result-row total-row">
+                  <label>순익:</label>
+                  <span class="result-value" id="netProfit1">0</span>원
+                  <span class="rate"
+                    >(<span id="netProfitRate1">0</span>%)</span
+                  >
+                </div>
+              </div>
+
+              <div class="fee-details">
+                <h3 class="section-title">지출 상세</h3>
+                <div class="result-row">
+                  <label>포인트 총비용:</label>
+                  <span class="result-value" id="totalPointCost1">0</span>원
+                  <span class="rate"
+                    >(<span id="pointCostRate1">0</span>%)</span
+                  >
+                </div>
+                <div class="result-row">
+                  <label>티켓 총비용:</label>
+                  <span class="result-value" id="totalTicketCost1">0</span>원
+                  <span class="rate"
+                    >(<span id="ticketCostRate1">0</span>%)</span
+                  >
+                </div>
+                <div class="result-row">
+                  <label>판관비:</label>
+                  <span class="result-value" id="totalManagementFee1">0</span>원
+                  <span class="rate"
+                    >(<span id="managementFeeRate1">0</span>%)</span
+                  >
+                </div>
+                <div class="result-row">
+                  <label>마케팅비:</label>
+                  <span class="result-value" id="totalMarketingFee1">0</span>원
+                  <span class="rate"
+                    >(<span id="marketingFeeRate1">0</span>%)</span
+                  >
+                </div>
+                <div class="result-row">
+                  <label>시작 보상:</label>
+                  <span class="result-value" id="totalMarketCompensation1"
+                    >0</span
+                  >원
+                  <span class="rate"
+                    >(<span id="marketCompensationRate1">0</span>%)</span
+                  >
+                </div>
+                <div class="result-row">
+                  <label>대행사수수료:</label>
+                  <span class="result-value" id="totalAgencyFee1">0</span>원
+                  <span class="rate"
+                    >(<span id="agencyFeeRate1">0</span>%)</span
+                  >
+                </div>
+              </div>
             </div>
 
-            <!-- 계산기 B -->
-            <div class="calculator">
-                <h2 class="calculator-title">판관비 기준 BEP 계산기 (월)</h2>
-                <p class="calculator-description">
-                    이건 월로 계산했습니다. 순익+판관비 5,000만원을 최소 금액으로 잡았습니다.
-                </p>
-                <div class="input-sections-container">
-                    <div class="input-section">
-                        <h3>기본 단가 입력</h3>
-                        <div class="input-group">
-                            <label for="pricePerClick2">클릭당 단가:</label>
-                            <input type="text" id="pricePerClick2" name="pricePerClick" value="35">
-                            <span>원</span>
-                        </div>
-                        <div class="input-group">
-                            <label for="pricePerPoint2">포인트 단가:</label>
-                            <input type="text" id="pricePerPoint2" name="pricePerPoint" value="10">
-                            <span>원</span>
-                        </div>
-                        <div class="input-group">
-                            <label for="pricePerTicket2">티켓 단가:</label>
-                            <input type="text" id="pricePerTicket2" name="pricePerTicket" value="5">
-                            <span>원</span>
-                        </div>
-                        <div class="input-group">
-                            <label for="expectedClicks2">예상 미션수:</label>
-                            <input type="text" id="expectedClicks2" name="expectedClicks" value="4,000,000">
-                            <span>회</span>
-                        </div>
-                    </div>
-                    <div class="input-section">
-                        <h3>수수료 비율 입력</h3>
-                        <div class="input-group">
-                            <label for="managementFee2">판관비:</label>
-                            <input type="text" id="managementFee2" name="managementFee" value="10">
-                            <span>%</span>
-                        </div>
-                        <div class="input-group">
-                            <label for="marketingFee2">마케팅비:</label>
-                            <input type="text" id="marketingFee2" name="marketingFee" value="5">
-                            <span>%</span>
-                        </div>
-                        <div class="input-group">
-                            <label for="marketCompensation2">시작 보상:</label>
-                            <input type="text" id="marketCompensation2" name="marketCompensation" value="5">
-                            <span>%</span>
-                        </div>
-                        <div class="input-group">
-                            <label for="agencyFee2">대행사수수료:</label>
-                            <input type="text" id="agencyFee2" name="agencyFee" value="15">
-                            <span>%</span>
-                        </div>
-                    </div>
+            <div class="resources-section">
+              <h3 class="section-title">
+                필요 자원
+                <span class="reference-data"
+                  >(25.01.31~2025.02.05 1DAU당 미션수 = 4회)</span
+                >
+              </h3>
+              <div class="resources-container">
+                <div class="resource-item">
+                  <label>필요 DAU:</label>
+                  <span class="result-value" id="requiredDau1">0</span>명
+                  <span class="calculation">(예상클릭수÷4)</span>
                 </div>
-                <div class="result-section">
-                    <h2>계산 결과</h2>
-                    <div class="results-container">
-                        <div class="main-results">
-                            <h3 class="section-title">주요 결과</h3>
-                            <div class="result-row">
-                                <label>총 매출:</label>
-                                <span class="result-value" id="totalRevenue2">0</span>원
-                            </div>
-                            <div class="result-row">
-                                <label>총 지출:</label>
-                                <span class="result-value" id="totalExpenses2">0</span>원
-                                <span class="rate">(<span id="totalExpenseRate2">0</span>%)</span>
-                            </div>
-                            <div class="result-row total-row">
-                                <label>순익:</label>
-                                <span class="result-value" id="netProfit2">0</span>원
-                                <span class="rate">(<span id="netProfitRate2">0</span>%)</span>
-                            </div>
-                        </div>
-                        
-                        <div class="fee-details">
-                            <h3 class="section-title">지출 상세</h3>
-                            <div class="result-row">
-                                <label>포인트 총비용:</label>
-                                <span class="result-value" id="totalPointCost2">0</span>원
-                                <span class="rate">(<span id="pointCostRate2">0</span>%)</span>
-                            </div>
-                            <div class="result-row">
-                                <label>티켓 총비용:</label>
-                                <span class="result-value" id="totalTicketCost2">0</span>원
-                                <span class="rate">(<span id="ticketCostRate2">0</span>%)</span>
-                            </div>
-                            <div class="result-row">
-                                <label>판관비:</label>
-                                <span class="result-value" id="totalManagementFee2">0</span>원
-                                <span class="rate">(<span id="managementFeeRate2">0</span>%)</span>
-                            </div>
-                            <div class="result-row">
-                                <label>마케팅비:</label>
-                                <span class="result-value" id="totalMarketingFee2">0</span>원
-                                <span class="rate">(<span id="marketingFeeRate2">0</span>%)</span>
-                            </div>
-                            <div class="result-row">
-                                <label>시작 보상:</label>
-                                <span class="result-value" id="totalMarketCompensation2">0</span>원
-                                <span class="rate">(<span id="marketCompensationRate2">0</span>%)</span>
-                            </div>
-                            <div class="result-row">
-                                <label>대행사수수료:</label>
-                                <span class="result-value" id="totalAgencyFee2">0</span>원
-                                <span class="rate">(<span id="agencyFeeRate2">0</span>%)</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="resources-section">
-                        <h3 class="section-title">필요 자원</h3>
-                        <div class="resources-container">
-                            <div class="resource-item">
-                                <label>필요 DAU:</label>
-                                <span class="result-value" id="requiredDau2">0</span>명
-                                <span class="calculation">(예상클릭수÷4÷30)</span>
-                            </div>
-                            <div class="resource-item">
-                                <label>필요 유저:</label>
-                                <span class="result-value" id="requiredUsers2">0</span>명
-                                <span class="calculation">(예상클릭수×70%÷30)</span>
-                            </div>
-                            <div class="resource-item">
-                                <label>필요 업체수:</label>
-                                <span class="result-value" id="requiredCompanies2">0</span>개
-                                <span class="calculation">(예상클릭수÷100÷30)</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="marketing-budget-section">
-                        <h3 class="section-title">유저 확보를 위한 마케팅 예산</h3>
-                        <div class="input-group">
-                            <label for="costPerSignup2">회원가입당 단가:</label>
-                            <input type="text" id="costPerSignup2" name="costPerSignup" value="3,000">
-                            <span>원</span>
-                        </div>
-                        <div class="result-row">
-                            <label>필요 마케팅 비용:</label>
-                            <span class="result-value" id="requiredMarketingBudget2">0</span>원
-                            <span class="calculation">(회원가입당 단가×필요유저)</span>
-                        </div>
-                    </div>
+                <div class="resource-item">
+                  <label>필요 유저:</label>
+                  <span class="result-value" id="requiredUsers1">0</span>명
+                  <span class="calculation">(예상클릭수×70%)</span>
                 </div>
+                <div class="resource-item">
+                  <label>필요 업체수:</label>
+                  <span class="result-value" id="requiredCompanies1">0</span>개
+                  <span class="calculation">(예상클릭수÷100)</span>
+                </div>
+              </div>
             </div>
 
-            <!-- 계산기 C -->
-            <div class="calculator">
-                <h2 class="calculator-title">경품 최소 후킹 기준 계산기</h2>
-                <p class="calculator-description">
-                    경품이 후킹이 되려면 최소 10만원 상당의 경품일때 유의미한 숫자의 후킹이 발생했습니다. 그래서 티켓 총비용이 10만원이 될 수 있는 최소 미션수를 산출했습니다.
-                </p>
-                <div class="input-sections-container">
-                    <div class="input-section">
-                        <h3>기본 단가 입력</h3>
-                        <div class="input-group">
-                            <label for="pricePerClick3">클릭당 단가:</label>
-                            <input type="text" id="pricePerClick3" name="pricePerClick" value="35">
-                            <span>원</span>
-                        </div>
-                        <div class="input-group">
-                            <label for="pricePerPoint3">포인트 단가:</label>
-                            <input type="text" id="pricePerPoint3" name="pricePerPoint" value="10">
-                            <span>원</span>
-                        </div>
-                        <div class="input-group">
-                            <label for="pricePerTicket3">티켓 단가:</label>
-                            <input type="text" id="pricePerTicket3" name="pricePerTicket" value="5">
-                            <span>원</span>
-                        </div>
-                        <div class="input-group">
-                            <label for="expectedClicks3">예상 미션수:</label>
-                            <input type="text" id="expectedClicks3" name="expectedClicks" value="20,000">
-                            <span>회</span>
-                        </div>
-                    </div>
-                    <div class="input-section">
-                        <h3>수수료 비율 입력</h3>
-                        <div class="input-group">
-                            <label for="managementFee3">판관비:</label>
-                            <input type="text" id="managementFee3" name="managementFee" value="10">
-                            <span>%</span>
-                        </div>
-                        <div class="input-group">
-                            <label for="marketingFee3">마케팅비:</label>
-                            <input type="text" id="marketingFee3" name="marketingFee" value="5">
-                            <span>%</span>
-                        </div>
-                        <div class="input-group">
-                            <label for="marketCompensation3">시작 보상:</label>
-                            <input type="text" id="marketCompensation3" name="marketCompensation" value="5">
-                            <span>%</span>
-                        </div>
-                        <div class="input-group">
-                            <label for="agencyFee3">대행사수수료:</label>
-                            <input type="text" id="agencyFee3" name="agencyFee" value="15">
-                            <span>%</span>
-                        </div>
-                    </div>
+            <div class="additional-info-container">
+              <div class="marketing-budget-section">
+                <h3 class="section-title">유저 확보를 위한 마케팅 예산</h3>
+                <div class="input-group">
+                  <label for="costPerSignup1">회원가입당 단가:</label>
+                  <input
+                    type="text"
+                    id="costPerSignup1"
+                    name="costPerSignup"
+                    value="1,000"
+                  />
+                  <span>원</span>
                 </div>
-                <div class="result-section">
-                    <h2>계산 결과</h2>
-                    <div class="results-container">
-                        <div class="main-results">
-                            <h3 class="section-title">주요 결과</h3>
-                            <div class="result-row">
-                                <label>총 매출:</label>
-                                <span class="result-value" id="totalRevenue3">0</span>원
-                            </div>
-                            <div class="result-row">
-                                <label>총 지출:</label>
-                                <span class="result-value" id="totalExpenses3">0</span>원
-                                <span class="rate">(<span id="totalExpenseRate3">0</span>%)</span>
-                            </div>
-                            <div class="result-row total-row">
-                                <label>순익:</label>
-                                <span class="result-value" id="netProfit3">0</span>원
-                                <span class="rate">(<span id="netProfitRate3">0</span>%)</span>
-                            </div>
-                        </div>
-                        
-                        <div class="fee-details">
-                            <h3 class="section-title">지출 상세</h3>
-                            <div class="result-row">
-                                <label>포인트 총비용:</label>
-                                <span class="result-value" id="totalPointCost3">0</span>원
-                                <span class="rate">(<span id="pointCostRate3">0</span>%)</span>
-                            </div>
-                            <div class="result-row">
-                                <label>티켓 총비용:</label>
-                                <span class="result-value" id="totalTicketCost3">0</span>원
-                                <span class="rate">(<span id="ticketCostRate3">0</span>%)</span>
-                            </div>
-                            <div class="result-row">
-                                <label>판관비:</label>
-                                <span class="result-value" id="totalManagementFee3">0</span>원
-                                <span class="rate">(<span id="managementFeeRate3">0</span>%)</span>
-                            </div>
-                            <div class="result-row">
-                                <label>마케팅비:</label>
-                                <span class="result-value" id="totalMarketingFee3">0</span>원
-                                <span class="rate">(<span id="marketingFeeRate3">0</span>%)</span>
-                            </div>
-                            <div class="result-row">
-                                <label>시작 보상:</label>
-                                <span class="result-value" id="totalMarketCompensation3">0</span>원
-                                <span class="rate">(<span id="marketCompensationRate3">0</span>%)</span>
-                            </div>
-                            <div class="result-row">
-                                <label>대행사수수료:</label>
-                                <span class="result-value" id="totalAgencyFee3">0</span>원
-                                <span class="rate">(<span id="agencyFeeRate3">0</span>%)</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="resources-section">
-                        <h3 class="section-title">필요 자원</h3>
-                        <div class="resources-container">
-                            <div class="resource-item">
-                                <label>필요 DAU:</label>
-                                <span class="result-value" id="requiredDau3">0</span>명
-                                <span class="calculation">(예상클릭수÷4)</span>
-                            </div>
-                            <div class="resource-item">
-                                <label>필요 유저:</label>
-                                <span class="result-value" id="requiredUsers3">0</span>명
-                                <span class="calculation">(예상클릭수×70%)</span>
-                            </div>
-                            <div class="resource-item">
-                                <label>필요 업체수:</label>
-                                <span class="result-value" id="requiredCompanies3">0</span>개
-                                <span class="calculation">(예상클릭수÷100)</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="marketing-budget-section">
-                        <h3 class="section-title">유저 확보를 위한 마케팅 예산</h3>
-                        <div class="input-group">
-                            <label for="costPerSignup3">회원가입당 단가:</label>
-                            <input type="text" id="costPerSignup3" name="costPerSignup" value="3,000">
-                            <span>원</span>
-                        </div>
-                        <div class="result-row">
-                            <label>필요 마케팅 비용:</label>
-                            <span class="result-value" id="requiredMarketingBudget3">0</span>원
-                            <span class="calculation">(회원가입당 단가×필요유저)</span>
-                        </div>
-                    </div>
+                <div class="result-row">
+                  <label>필요 마케팅 비용:</label>
+                  <span class="result-value" id="requiredMarketingBudget1"
+                    >0</span
+                  >원
+                  <span class="calculation">(회원가입당 단가×필요유저)</span>
                 </div>
+              </div>
+              <div class="required-product-section">
+                <h3 class="section-title">필요상품</h3>
+                <div class="input-group">
+                  <label for="productPrice1">상품 단가:</label>
+                  <input
+                    type="text"
+                    id="productPrice1"
+                    name="productPrice"
+                    value="100,000"
+                  />
+                  <span>원</span>
+                </div>
+                <div class="result-row">
+                  <label>필요 상품수:</label>
+                  <span class="result-value" id="requiredProducts1">0</span>개
+                  <span class="calculation">(티켓 총비용÷상품단가)</span>
+                </div>
+                <div class="result-row">
+                  <label>상품당 필요 미션수:</label>
+                  <span class="result-value" id="missionsPerProduct1">0</span>회
+                  <span class="calculation">(예상미션수÷필요상품수)</span>
+                </div>
+              </div>
             </div>
-
-            <!-- 계산기 D -->
-            <div class="calculator">
-                <h2 class="calculator-title">일반 계산기</h2>
-                <p class="calculator-description">
-                    그 외의 아이디어가 있으시면 자유롭게 계산해보세요.
-                </p>
-                <div class="input-sections-container">
-                    <div class="input-section">
-                        <h3>기본 단가 입력</h3>
-                        <div class="input-group">
-                            <label for="pricePerClick4">클릭당 단가:</label>
-                            <input type="text" id="pricePerClick4" name="pricePerClick" value="35">
-                            <span>원</span>
-                        </div>
-                        <div class="input-group">
-                            <label for="pricePerPoint4">포인트 단가:</label>
-                            <input type="text" id="pricePerPoint4" name="pricePerPoint" value="10">
-                            <span>원</span>
-                        </div>
-                        <div class="input-group">
-                            <label for="pricePerTicket4">티켓 단가:</label>
-                            <input type="text" id="pricePerTicket4" name="pricePerTicket" value="5">
-                            <span>원</span>
-                        </div>
-                        <div class="input-group">
-                            <label for="expectedClicks4">예상 미션수:</label>
-                            <input type="text" id="expectedClicks4" name="expectedClicks" min="0" placeholder="예상 미션수">
-                            <span>회</span>
-                        </div>
-                    </div>
-                    <div class="input-section">
-                        <h3>수수료 비율 입력</h3>
-                        <div class="input-group">
-                            <label for="managementFee4">판관비:</label>
-                            <input type="text" id="managementFee4" name="managementFee" value="10">
-                            <span>%</span>
-                        </div>
-                        <div class="input-group">
-                            <label for="marketingFee4">마케팅비:</label>
-                            <input type="text" id="marketingFee4" name="marketingFee" value="5">
-                            <span>%</span>
-                        </div>
-                        <div class="input-group">
-                            <label for="marketCompensation4">시작 보상:</label>
-                            <input type="text" id="marketCompensation4" name="marketCompensation" value="5">
-                            <span>%</span>
-                        </div>
-                        <div class="input-group">
-                            <label for="agencyFee4">대행사수수료:</label>
-                            <input type="text" id="agencyFee4" name="agencyFee" value="15">
-                            <span>%</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="result-section">
-                    <h2>계산 결과</h2>
-                    <div class="results-container">
-                        <div class="main-results">
-                            <h3 class="section-title">주요 결과</h3>
-                            <div class="result-row">
-                                <label>총 매출:</label>
-                                <span class="result-value" id="totalRevenue4">0</span>원
-                            </div>
-                            <div class="result-row">
-                                <label>총 지출:</label>
-                                <span class="result-value" id="totalExpenses4">0</span>원
-                                <span class="rate">(<span id="totalExpenseRate4">0</span>%)</span>
-                            </div>
-                            <div class="result-row total-row">
-                                <label>순익:</label>
-                                <span class="result-value" id="netProfit4">0</span>원
-                                <span class="rate">(<span id="netProfitRate4">0</span>%)</span>
-                            </div>
-                        </div>
-                        
-                        <div class="fee-details">
-                            <h3 class="section-title">지출 상세</h3>
-                            <div class="result-row">
-                                <label>포인트 총비용:</label>
-                                <span class="result-value" id="totalPointCost4">0</span>원
-                                <span class="rate">(<span id="pointCostRate4">0</span>%)</span>
-                            </div>
-                            <div class="result-row">
-                                <label>티켓 총비용:</label>
-                                <span class="result-value" id="totalTicketCost4">0</span>원
-                                <span class="rate">(<span id="ticketCostRate4">0</span>%)</span>
-                            </div>
-                            <div class="result-row">
-                                <label>판관비:</label>
-                                <span class="result-value" id="totalManagementFee4">0</span>원
-                                <span class="rate">(<span id="managementFeeRate4">0</span>%)</span>
-                            </div>
-                            <div class="result-row">
-                                <label>마케팅비:</label>
-                                <span class="result-value" id="totalMarketingFee4">0</span>원
-                                <span class="rate">(<span id="marketingFeeRate4">0</span>%)</span>
-                            </div>
-                            <div class="result-row">
-                                <label>시작 보상:</label>
-                                <span class="result-value" id="totalMarketCompensation4">0</span>원
-                                <span class="rate">(<span id="marketCompensationRate4">0</span>%)</span>
-                            </div>
-                            <div class="result-row">
-                                <label>대행사수수료:</label>
-                                <span class="result-value" id="totalAgencyFee4">0</span>원
-                                <span class="rate">(<span id="agencyFeeRate4">0</span>%)</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="resources-section">
-                        <h3 class="section-title">필요 자원</h3>
-                        <div class="resources-container">
-                            <div class="resource-item">
-                                <label>필요 DAU:</label>
-                                <span class="result-value" id="requiredDau4">0</span>명
-                                <span class="calculation">(예상클릭수÷4)</span>
-                            </div>
-                            <div class="resource-item">
-                                <label>필요 유저:</label>
-                                <span class="result-value" id="requiredUsers4">0</span>명
-                                <span class="calculation">(예상클릭수×70%)</span>
-                            </div>
-                            <div class="resource-item">
-                                <label>필요 업체수:</label>
-                                <span class="result-value" id="requiredCompanies4">0</span>개
-                                <span class="calculation">(예상클릭수÷100)</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="marketing-budget-section">
-                        <h3 class="section-title">유저 확보를 위한 마케팅 예산</h3>
-                        <div class="input-group">
-                            <label for="costPerSignup4">회원가입당 단가:</label>
-                            <input type="text" id="costPerSignup4" name="costPerSignup" value="3,000">
-                            <span>원</span>
-                        </div>
-                        <div class="result-row">
-                            <label>필요 마케팅 비용:</label>
-                            <span class="result-value" id="requiredMarketingBudget4">0</span>원
-                            <span class="calculation">(회원가입당 단가×필요유저)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
+
+        <!-- 계산기 B -->
+        <div class="calculator">
+          <h2 class="calculator-title">판관비 기준 BEP 계산기 (월)</h2>
+          <p class="calculator-description">
+            이건 월로 계산했습니다. 순익+판관비 5,000만원을 최소 금액으로
+            잡았습니다.
+          </p>
+          <div class="input-sections-container">
+            <div class="input-section">
+              <h3>기본 단가 입력</h3>
+              <div class="input-group">
+                <label for="pricePerClick2">클릭당 단가:</label>
+                <input
+                  type="text"
+                  id="pricePerClick2"
+                  name="pricePerClick"
+                  value="35"
+                />
+                <span>원</span>
+              </div>
+              <div class="input-group">
+                <label for="pricePerPoint2">포인트 단가:</label>
+                <input
+                  type="text"
+                  id="pricePerPoint2"
+                  name="pricePerPoint"
+                  value="10"
+                />
+                <span>원</span>
+              </div>
+              <div class="input-group">
+                <label for="pricePerTicket2">티켓 단가:</label>
+                <input
+                  type="text"
+                  id="pricePerTicket2"
+                  name="pricePerTicket"
+                  value="5"
+                />
+                <span>원</span>
+              </div>
+              <div class="input-group">
+                <label for="expectedClicks2">예상 미션수:</label>
+                <input
+                  type="text"
+                  id="expectedClicks2"
+                  name="expectedClicks"
+                  value="4,000,000"
+                />
+                <span>회</span>
+              </div>
+            </div>
+            <div class="input-section">
+              <h3>수수료 비율 입력</h3>
+              <div class="input-group">
+                <label for="managementFee2">판관비:</label>
+                <input
+                  type="text"
+                  id="managementFee2"
+                  name="managementFee"
+                  value="10"
+                />
+                <span>%</span>
+              </div>
+              <div class="input-group">
+                <label for="marketingFee2">마케팅비:</label>
+                <input
+                  type="text"
+                  id="marketingFee2"
+                  name="marketingFee"
+                  value="5"
+                />
+                <span>%</span>
+              </div>
+              <div class="input-group">
+                <label for="marketCompensation2">시작 보상:</label>
+                <input
+                  type="text"
+                  id="marketCompensation2"
+                  name="marketCompensation"
+                  value="5"
+                />
+                <span>%</span>
+              </div>
+              <div class="input-group">
+                <label for="agencyFee2">대행사수수료:</label>
+                <input
+                  type="text"
+                  id="agencyFee2"
+                  name="agencyFee"
+                  value="15"
+                />
+                <span>%</span>
+              </div>
+            </div>
+          </div>
+          <div class="result-section">
+            <h2>계산 결과</h2>
+            <div class="results-container">
+              <div class="main-results">
+                <h3 class="section-title">주요 결과</h3>
+                <div class="result-row">
+                  <label>총 매출:</label>
+                  <span class="result-value" id="totalRevenue2">0</span>원
+                </div>
+                <div class="result-row">
+                  <label>총 지출:</label>
+                  <span class="result-value" id="totalExpenses2">0</span>원
+                  <span class="rate"
+                    >(<span id="totalExpenseRate2">0</span>%)</span
+                  >
+                </div>
+                <div class="result-row total-row">
+                  <label>순익:</label>
+                  <span class="result-value" id="netProfit2">0</span>원
+                  <span class="rate"
+                    >(<span id="netProfitRate2">0</span>%)</span
+                  >
+                </div>
+              </div>
+
+              <div class="fee-details">
+                <h3 class="section-title">지출 상세</h3>
+                <div class="result-row">
+                  <label>포인트 총비용:</label>
+                  <span class="result-value" id="totalPointCost2">0</span>원
+                  <span class="rate"
+                    >(<span id="pointCostRate2">0</span>%)</span
+                  >
+                </div>
+                <div class="result-row">
+                  <label>티켓 총비용:</label>
+                  <span class="result-value" id="totalTicketCost2">0</span>원
+                  <span class="rate"
+                    >(<span id="ticketCostRate2">0</span>%)</span
+                  >
+                </div>
+                <div class="result-row">
+                  <label>판관비:</label>
+                  <span class="result-value" id="totalManagementFee2">0</span>원
+                  <span class="rate"
+                    >(<span id="managementFeeRate2">0</span>%)</span
+                  >
+                </div>
+                <div class="result-row">
+                  <label>마케팅비:</label>
+                  <span class="result-value" id="totalMarketingFee2">0</span>원
+                  <span class="rate"
+                    >(<span id="marketingFeeRate2">0</span>%)</span
+                  >
+                </div>
+                <div class="result-row">
+                  <label>시작 보상:</label>
+                  <span class="result-value" id="totalMarketCompensation2"
+                    >0</span
+                  >원
+                  <span class="rate"
+                    >(<span id="marketCompensationRate2">0</span>%)</span
+                  >
+                </div>
+                <div class="result-row">
+                  <label>대행사수수료:</label>
+                  <span class="result-value" id="totalAgencyFee2">0</span>원
+                  <span class="rate"
+                    >(<span id="agencyFeeRate2">0</span>%)</span
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div class="resources-section">
+              <h3 class="section-title">
+                필요 자원
+                <span class="reference-data"
+                  >(25.01.31~2025.02.05 1DAU당 미션수 = 4회)</span
+                >
+              </h3>
+              <div class="resources-container">
+                <div class="resource-item">
+                  <label>필요 DAU:</label>
+                  <span class="result-value" id="requiredDau2">0</span>명
+                  <span class="calculation">(예상클릭수÷4÷30)</span>
+                </div>
+                <div class="resource-item">
+                  <label>필요 유저:</label>
+                  <span class="result-value" id="requiredUsers2">0</span>명
+                  <span class="calculation">(예상클릭수×70%÷30)</span>
+                </div>
+                <div class="resource-item">
+                  <label>필요 업체수:</label>
+                  <span class="result-value" id="requiredCompanies2">0</span>개
+                  <span class="calculation">(예상클릭수÷100÷30)</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="additional-info-container">
+              <div class="marketing-budget-section">
+                <h3 class="section-title">유저 확보를 위한 마케팅 예산</h3>
+                <div class="input-group">
+                  <label for="costPerSignup2">회원가입당 단가:</label>
+                  <input
+                    type="text"
+                    id="costPerSignup2"
+                    name="costPerSignup"
+                    value="1,000"
+                  />
+                  <span>원</span>
+                </div>
+                <div class="result-row">
+                  <label>필요 마케팅 비용:</label>
+                  <span class="result-value" id="requiredMarketingBudget2"
+                    >0</span
+                  >원
+                  <span class="calculation">(회원가입당 단가×필요유저)</span>
+                </div>
+              </div>
+              <div class="required-product-section">
+                <h3 class="section-title">필요상품</h3>
+                <div class="input-group">
+                  <label for="productPrice2">상품 단가:</label>
+                  <input
+                    type="text"
+                    id="productPrice2"
+                    name="productPrice"
+                    value="100,000"
+                  />
+                  <span>원</span>
+                </div>
+                <div class="result-row">
+                  <label>필요 상품수:</label>
+                  <span class="result-value" id="requiredProducts2">0</span>개
+                  <span class="calculation">(티켓 총비용÷상품단가)</span>
+                </div>
+                <div class="result-row">
+                  <label>상품당 필요 미션수:</label>
+                  <span class="result-value" id="missionsPerProduct2">0</span>회
+                  <span class="calculation">(예상미션수÷필요상품수)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 계산기 C -->
+        <div class="calculator">
+          <h2 class="calculator-title">경품 최소 후킹 기준 계산기</h2>
+          <p class="calculator-description">
+            경품이 후킹이 되려면 최소 10만원 상당의 경품일때 유의미한 숫자의
+            후킹이 발생했습니다. 그래서 티켓 총비용이 10만원이 될 수 있는 최소
+            미션수를 산출했습니다.
+          </p>
+          <div class="input-sections-container">
+            <div class="input-section">
+              <h3>기본 단가 입력</h3>
+              <div class="input-group">
+                <label for="pricePerClick3">클릭당 단가:</label>
+                <input
+                  type="text"
+                  id="pricePerClick3"
+                  name="pricePerClick"
+                  value="35"
+                />
+                <span>원</span>
+              </div>
+              <div class="input-group">
+                <label for="pricePerPoint3">포인트 단가:</label>
+                <input
+                  type="text"
+                  id="pricePerPoint3"
+                  name="pricePerPoint"
+                  value="10"
+                />
+                <span>원</span>
+              </div>
+              <div class="input-group">
+                <label for="pricePerTicket3">티켓 단가:</label>
+                <input
+                  type="text"
+                  id="pricePerTicket3"
+                  name="pricePerTicket"
+                  value="5"
+                />
+                <span>원</span>
+              </div>
+              <div class="input-group">
+                <label for="expectedClicks3">예상 미션수:</label>
+                <input
+                  type="text"
+                  id="expectedClicks3"
+                  name="expectedClicks"
+                  value="20,000"
+                />
+                <span>회</span>
+              </div>
+            </div>
+            <div class="input-section">
+              <h3>수수료 비율 입력</h3>
+              <div class="input-group">
+                <label for="managementFee3">판관비:</label>
+                <input
+                  type="text"
+                  id="managementFee3"
+                  name="managementFee"
+                  value="10"
+                />
+                <span>%</span>
+              </div>
+              <div class="input-group">
+                <label for="marketingFee3">마케팅비:</label>
+                <input
+                  type="text"
+                  id="marketingFee3"
+                  name="marketingFee"
+                  value="5"
+                />
+                <span>%</span>
+              </div>
+              <div class="input-group">
+                <label for="marketCompensation3">시작 보상:</label>
+                <input
+                  type="text"
+                  id="marketCompensation3"
+                  name="marketCompensation"
+                  value="5"
+                />
+                <span>%</span>
+              </div>
+              <div class="input-group">
+                <label for="agencyFee3">대행사수수료:</label>
+                <input
+                  type="text"
+                  id="agencyFee3"
+                  name="agencyFee"
+                  value="15"
+                />
+                <span>%</span>
+              </div>
+            </div>
+          </div>
+          <div class="result-section">
+            <h2>계산 결과</h2>
+            <div class="results-container">
+              <div class="main-results">
+                <h3 class="section-title">주요 결과</h3>
+                <div class="result-row">
+                  <label>총 매출:</label>
+                  <span class="result-value" id="totalRevenue3">0</span>원
+                </div>
+                <div class="result-row">
+                  <label>총 지출:</label>
+                  <span class="result-value" id="totalExpenses3">0</span>원
+                  <span class="rate"
+                    >(<span id="totalExpenseRate3">0</span>%)</span
+                  >
+                </div>
+                <div class="result-row total-row">
+                  <label>순익:</label>
+                  <span class="result-value" id="netProfit3">0</span>원
+                  <span class="rate"
+                    >(<span id="netProfitRate3">0</span>%)</span
+                  >
+                </div>
+              </div>
+
+              <div class="fee-details">
+                <h3 class="section-title">지출 상세</h3>
+                <div class="result-row">
+                  <label>포인트 총비용:</label>
+                  <span class="result-value" id="totalPointCost3">0</span>원
+                  <span class="rate"
+                    >(<span id="pointCostRate3">0</span>%)</span
+                  >
+                </div>
+                <div class="result-row">
+                  <label>티켓 총비용:</label>
+                  <span class="result-value" id="totalTicketCost3">0</span>원
+                  <span class="rate"
+                    >(<span id="ticketCostRate3">0</span>%)</span
+                  >
+                </div>
+                <div class="result-row">
+                  <label>판관비:</label>
+                  <span class="result-value" id="totalManagementFee3">0</span>원
+                  <span class="rate"
+                    >(<span id="managementFeeRate3">0</span>%)</span
+                  >
+                </div>
+                <div class="result-row">
+                  <label>마케팅비:</label>
+                  <span class="result-value" id="totalMarketingFee3">0</span>원
+                  <span class="rate"
+                    >(<span id="marketingFeeRate3">0</span>%)</span
+                  >
+                </div>
+                <div class="result-row">
+                  <label>시작 보상:</label>
+                  <span class="result-value" id="totalMarketCompensation3"
+                    >0</span
+                  >원
+                  <span class="rate"
+                    >(<span id="marketCompensationRate3">0</span>%)</span
+                  >
+                </div>
+                <div class="result-row">
+                  <label>대행사수수료:</label>
+                  <span class="result-value" id="totalAgencyFee3">0</span>원
+                  <span class="rate"
+                    >(<span id="agencyFeeRate3">0</span>%)</span
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div class="resources-section">
+              <h3 class="section-title">
+                필요 자원
+                <span class="reference-data"
+                  >(25.01.31~2025.02.05 1DAU당 미션수 = 4회)</span
+                >
+              </h3>
+              <div class="resources-container">
+                <div class="resource-item">
+                  <label>필요 DAU:</label>
+                  <span class="result-value" id="requiredDau3">0</span>명
+                  <span class="calculation">(예상클릭수÷4)</span>
+                </div>
+                <div class="resource-item">
+                  <label>필요 유저:</label>
+                  <span class="result-value" id="requiredUsers3">0</span>명
+                  <span class="calculation">(예상클릭수×70%)</span>
+                </div>
+                <div class="resource-item">
+                  <label>필요 업체수:</label>
+                  <span class="result-value" id="requiredCompanies3">0</span>개
+                  <span class="calculation">(예상클릭수÷100)</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="additional-info-container">
+              <div class="marketing-budget-section">
+                <h3 class="section-title">유저 확보를 위한 마케팅 예산</h3>
+                <div class="input-group">
+                  <label for="costPerSignup3">회원가입당 단가:</label>
+                  <input
+                    type="text"
+                    id="costPerSignup3"
+                    name="costPerSignup"
+                    value="1,000"
+                  />
+                  <span>원</span>
+                </div>
+                <div class="result-row">
+                  <label>필요 마케팅 비용:</label>
+                  <span class="result-value" id="requiredMarketingBudget3"
+                    >0</span
+                  >원
+                  <span class="calculation">(회원가입당 단가×필요유저)</span>
+                </div>
+              </div>
+              <div class="required-product-section">
+                <h3 class="section-title">필요상품</h3>
+                <div class="input-group">
+                  <label for="productPrice3">상품 단가:</label>
+                  <input
+                    type="text"
+                    id="productPrice3"
+                    name="productPrice"
+                    value="100,000"
+                  />
+                  <span>원</span>
+                </div>
+                <div class="result-row">
+                  <label>필요 상품수:</label>
+                  <span class="result-value" id="requiredProducts3">0</span>개
+                  <span class="calculation">(티켓 총비용÷상품단가)</span>
+                </div>
+                <div class="result-row">
+                  <label>상품당 필요 미션수:</label>
+                  <span class="result-value" id="missionsPerProduct3">0</span>회
+                  <span class="calculation">(예상미션수÷필요상품수)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 계산기 D -->
+        <div class="calculator">
+          <h2 class="calculator-title">일반 계산기</h2>
+          <p class="calculator-description">
+            그 외의 아이디어가 있으시면 자유롭게 계산해보세요.
+          </p>
+          <div class="input-sections-container">
+            <div class="input-section">
+              <h3>기본 단가 입력</h3>
+              <div class="input-group">
+                <label for="pricePerClick4">클릭당 단가:</label>
+                <input
+                  type="text"
+                  id="pricePerClick4"
+                  name="pricePerClick"
+                  value="35"
+                />
+                <span>원</span>
+              </div>
+              <div class="input-group">
+                <label for="pricePerPoint4">포인트 단가:</label>
+                <input
+                  type="text"
+                  id="pricePerPoint4"
+                  name="pricePerPoint"
+                  value="10"
+                />
+                <span>원</span>
+              </div>
+              <div class="input-group">
+                <label for="pricePerTicket4">티켓 단가:</label>
+                <input
+                  type="text"
+                  id="pricePerTicket4"
+                  name="pricePerTicket"
+                  value="5"
+                />
+                <span>원</span>
+              </div>
+              <div class="input-group">
+                <label for="expectedClicks4">예상 미션수:</label>
+                <input
+                  type="text"
+                  id="expectedClicks4"
+                  name="expectedClicks"
+                  min="0"
+                  placeholder="예상 미션수"
+                />
+                <span>회</span>
+              </div>
+            </div>
+            <div class="input-section">
+              <h3>수수료 비율 입력</h3>
+              <div class="input-group">
+                <label for="managementFee4">판관비:</label>
+                <input
+                  type="text"
+                  id="managementFee4"
+                  name="managementFee"
+                  value="10"
+                />
+                <span>%</span>
+              </div>
+              <div class="input-group">
+                <label for="marketingFee4">마케팅비:</label>
+                <input
+                  type="text"
+                  id="marketingFee4"
+                  name="marketingFee"
+                  value="5"
+                />
+                <span>%</span>
+              </div>
+              <div class="input-group">
+                <label for="marketCompensation4">시작 보상:</label>
+                <input
+                  type="text"
+                  id="marketCompensation4"
+                  name="marketCompensation"
+                  value="5"
+                />
+                <span>%</span>
+              </div>
+              <div class="input-group">
+                <label for="agencyFee4">대행사수수료:</label>
+                <input
+                  type="text"
+                  id="agencyFee4"
+                  name="agencyFee"
+                  value="15"
+                />
+                <span>%</span>
+              </div>
+            </div>
+          </div>
+          <div class="result-section">
+            <h2>계산 결과</h2>
+            <div class="results-container">
+              <div class="main-results">
+                <h3 class="section-title">주요 결과</h3>
+                <div class="result-row">
+                  <label>총 매출:</label>
+                  <span class="result-value" id="totalRevenue4">0</span>원
+                </div>
+                <div class="result-row">
+                  <label>총 지출:</label>
+                  <span class="result-value" id="totalExpenses4">0</span>원
+                  <span class="rate"
+                    >(<span id="totalExpenseRate4">0</span>%)</span
+                  >
+                </div>
+                <div class="result-row total-row">
+                  <label>순익:</label>
+                  <span class="result-value" id="netProfit4">0</span>원
+                  <span class="rate"
+                    >(<span id="netProfitRate4">0</span>%)</span
+                  >
+                </div>
+              </div>
+
+              <div class="fee-details">
+                <h3 class="section-title">지출 상세</h3>
+                <div class="result-row">
+                  <label>포인트 총비용:</label>
+                  <span class="result-value" id="totalPointCost4">0</span>원
+                  <span class="rate"
+                    >(<span id="pointCostRate4">0</span>%)</span
+                  >
+                </div>
+                <div class="result-row">
+                  <label>티켓 총비용:</label>
+                  <span class="result-value" id="totalTicketCost4">0</span>원
+                  <span class="rate"
+                    >(<span id="ticketCostRate4">0</span>%)</span
+                  >
+                </div>
+                <div class="result-row">
+                  <label>판관비:</label>
+                  <span class="result-value" id="totalManagementFee4">0</span>원
+                  <span class="rate"
+                    >(<span id="managementFeeRate4">0</span>%)</span
+                  >
+                </div>
+                <div class="result-row">
+                  <label>마케팅비:</label>
+                  <span class="result-value" id="totalMarketingFee4">0</span>원
+                  <span class="rate"
+                    >(<span id="marketingFeeRate4">0</span>%)</span
+                  >
+                </div>
+                <div class="result-row">
+                  <label>시작 보상:</label>
+                  <span class="result-value" id="totalMarketCompensation4"
+                    >0</span
+                  >원
+                  <span class="rate"
+                    >(<span id="marketCompensationRate4">0</span>%)</span
+                  >
+                </div>
+                <div class="result-row">
+                  <label>대행사수수료:</label>
+                  <span class="result-value" id="totalAgencyFee4">0</span>원
+                  <span class="rate"
+                    >(<span id="agencyFeeRate4">0</span>%)</span
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div class="resources-section">
+              <h3 class="section-title">
+                필요 자원
+                <span class="reference-data"
+                  >(25.01.31~2025.02.05 1DAU당 미션수 = 4회)</span
+                >
+              </h3>
+              <div class="resources-container">
+                <div class="resource-item">
+                  <label>필요 DAU:</label>
+                  <span class="result-value" id="requiredDau4">0</span>명
+                  <span class="calculation">(예상클릭수÷4)</span>
+                </div>
+                <div class="resource-item">
+                  <label>필요 유저:</label>
+                  <span class="result-value" id="requiredUsers4">0</span>명
+                  <span class="calculation">(예상클릭수×70%)</span>
+                </div>
+                <div class="resource-item">
+                  <label>필요 업체수:</label>
+                  <span class="result-value" id="requiredCompanies4">0</span>개
+                  <span class="calculation">(예상클릭수÷100)</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="additional-info-container">
+              <div class="marketing-budget-section">
+                <h3 class="section-title">유저 확보를 위한 마케팅 예산</h3>
+                <div class="input-group">
+                  <label for="costPerSignup4">회원가입당 단가:</label>
+                  <input
+                    type="text"
+                    id="costPerSignup4"
+                    name="costPerSignup"
+                    value="1,000"
+                  />
+                  <span>원</span>
+                </div>
+                <div class="result-row">
+                  <label>필요 마케팅 비용:</label>
+                  <span class="result-value" id="requiredMarketingBudget4"
+                    >0</span
+                  >원
+                  <span class="calculation">(회원가입당 단가×필요유저)</span>
+                </div>
+              </div>
+              <div class="required-product-section">
+                <h3 class="section-title">필요상품</h3>
+                <div class="input-group">
+                  <label for="productPrice4">상품 단가:</label>
+                  <input
+                    type="text"
+                    id="productPrice4"
+                    name="productPrice"
+                    value="100,000"
+                  />
+                  <span>원</span>
+                </div>
+                <div class="result-row">
+                  <label>필요 상품수:</label>
+                  <span class="result-value" id="requiredProducts4">0</span>개
+                  <span class="calculation">(티켓 총비용÷상품단가)</span>
+                </div>
+                <div class="result-row">
+                  <label>상품당 필요 미션수:</label>
+                  <span class="result-value" id="missionsPerProduct4">0</span>회
+                  <span class="calculation">(예상미션수÷필요상품수)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script>
-        // 입력 필드에 천단위 구분기호 적용
-        function formatNumber(input) {
-            let value = input.value.replace(/[^\d]/g, '');
-            if (value) {
-                input.value = Number(value).toLocaleString();
-            }
-        }
+      // 입력 필드에 천단위 구분기호 적용
+      function formatNumber(input) {
+          let value = input.value.replace(/[^\d]/g, '');
+          if (value) {
+              input.value = Number(value).toLocaleString();
+          }
+      }
 
-        // 모든 입력 필드 초기화 및 이벤트 리스너 설정
-        document.querySelectorAll('input').forEach(input => {
-            // 초기값이 있는 경우 포맷팅 적용
-            if (input.value) {
-                if (!input.id.includes('Fee') && !input.id.includes('Compensation')) {
-                    formatNumber(input);
-                }
-            }
+      // 모든 입력 필드 초기화 및 이벤트 리스너 설정
+      document.querySelectorAll('input').forEach(input => {
+          // 초기값이 있는 경우 포맷팅 적용
+          if (input.value) {
+              if (!input.id.includes('Fee') && !input.id.includes('Compensation')) {
+                  formatNumber(input);
+              }
+          }
 
-            // 이벤트 리스너 설정
-            input.addEventListener('input', function() {
-                if (!this.id.includes('Fee') && !this.id.includes('Compensation')) {
-                    formatNumber(this);
-                }
-                // ID에서 suffix 추출 (마지막 숫자)
-                const suffix = this.id.match(/\d+$/)[0];
-                calculateAll(suffix);  // suffix 전달
-            });
-        });
+          // 이벤트 리스너 설정
+          input.addEventListener('input', function() {
+              if (!this.id.includes('Fee') && !this.id.includes('Compensation')) {
+                  formatNumber(this);
+              }
+              // ID에서 suffix 추출 (마지막 숫자)
+              const suffix = this.id.match(/\d+$/)[0];
+              calculateAll(suffix);  // suffix 전달
+          });
+      });
 
-        // 계산을 위해 숫자만 추출하는 함수 수정
-        function getNumberValue(input) {
-            return Number(input.value.replace(/[^0-9.-]/g, '')) || 0;
-        }
+      // 계산을 위해 숫자만 추출하는 함수 수정
+      function getNumberValue(input) {
+          return Number(input.value.replace(/[^0-9.-]/g, '')) || 0;
+      }
 
-        function calculateAll(suffix) {
-            // 입력값 가져오기
-            const pricePerClick = getNumberValue(document.getElementById('pricePerClick' + suffix));
-            const expectedClicks = getNumberValue(document.getElementById('expectedClicks' + suffix));
-            const pricePerPoint = getNumberValue(document.getElementById('pricePerPoint' + suffix));
-            const pricePerTicket = getNumberValue(document.getElementById('pricePerTicket' + suffix));
-            
-            // 총 매출 계산
-            const totalRevenue = pricePerClick * expectedClicks;
+      function calculateAll(suffix) {
+          // 입력값 가져오기
+          const pricePerClick = getNumberValue(document.getElementById('pricePerClick' + suffix));
+          const expectedClicks = getNumberValue(document.getElementById('expectedClicks' + suffix));
+          const pricePerPoint = getNumberValue(document.getElementById('pricePerPoint' + suffix));
+          const pricePerTicket = getNumberValue(document.getElementById('pricePerTicket' + suffix));
 
-            // 포인트와 티켓 총비용 계산
-            const totalPointCost = pricePerPoint * expectedClicks;
-            const totalTicketCost = pricePerTicket * expectedClicks;
+          // 총 매출 계산
+          const totalRevenue = pricePerClick * expectedClicks;
 
-            // 수수료 비율 가져오기
-            const managementFee = getNumberValue(document.getElementById('managementFee' + suffix));
-            const marketingFee = getNumberValue(document.getElementById('marketingFee' + suffix));
-            const marketCompensation = getNumberValue(document.getElementById('marketCompensation' + suffix));
-            const agencyFee = getNumberValue(document.getElementById('agencyFee' + suffix));
+          // 포인트와 티켓 총비용 계산
+          const totalPointCost = pricePerPoint * expectedClicks;
+          const totalTicketCost = pricePerTicket * expectedClicks;
 
-            // 각 수수료 금액 계산
-            const totalManagementFee = totalRevenue * (managementFee / 100);
-            const totalMarketingFee = totalRevenue * (marketingFee / 100);
-            const totalMarketCompensation = totalRevenue * (marketCompensation / 100);
-            const totalAgencyFee = totalRevenue * (agencyFee / 100);
+          // 수수료 비율 가져오기
+          const managementFee = getNumberValue(document.getElementById('managementFee' + suffix));
+          const marketingFee = getNumberValue(document.getElementById('marketingFee' + suffix));
+          const marketCompensation = getNumberValue(document.getElementById('marketCompensation' + suffix));
+          const agencyFee = getNumberValue(document.getElementById('agencyFee' + suffix));
 
-            // 총 지출 계산 (포인트와 티켓 비용 포함)
-            const totalExpenses = totalManagementFee + totalMarketingFee + 
-                                 totalMarketCompensation + totalAgencyFee +
-                                 totalPointCost + totalTicketCost;
+          // 각 수수료 금액 계산
+          const totalManagementFee = totalRevenue * (managementFee / 100);
+          const totalMarketingFee = totalRevenue * (marketingFee / 100);
+          const totalMarketCompensation = totalRevenue * (marketCompensation / 100);
+          const totalAgencyFee = totalRevenue * (agencyFee / 100);
 
-            // 순익 계산
-            const netProfit = totalRevenue - totalExpenses;
+          // 총 지출 계산 (포인트와 티켓 비용 포함)
+          const totalExpenses = totalManagementFee + totalMarketingFee +
+                               totalMarketCompensation + totalAgencyFee +
+                               totalPointCost + totalTicketCost;
 
-            // 비율 계산
-            const netProfitRate = totalRevenue ? Math.round((netProfit / totalRevenue) * 100) : 0;
-            const totalExpenseRate = totalRevenue ? Math.round((totalExpenses / totalRevenue) * 100) : 0;
-            
-            // 각 항목별 비율 계산
-            const pointCostRate = totalRevenue ? Math.round((totalPointCost / totalRevenue) * 100) : 0;
-            const ticketCostRate = totalRevenue ? Math.round((totalTicketCost / totalRevenue) * 100) : 0;
-            const managementFeeRate = totalRevenue ? Math.round((totalManagementFee / totalRevenue) * 100) : 0;
-            const marketingFeeRate = totalRevenue ? Math.round((totalMarketingFee / totalRevenue) * 100) : 0;
-            const marketCompensationRate = totalRevenue ? Math.round((totalMarketCompensation / totalRevenue) * 100) : 0;
-            const agencyFeeRate = totalRevenue ? Math.round((totalAgencyFee / totalRevenue) * 100) : 0;
+          // 순익 계산
+          const netProfit = totalRevenue - totalExpenses;
 
-            // 결과 표시
-            document.getElementById('totalRevenue' + suffix).textContent = totalRevenue.toLocaleString();
-            document.getElementById('totalExpenses' + suffix).textContent = totalExpenses.toLocaleString();
-            document.getElementById('netProfit' + suffix).textContent = netProfit.toLocaleString();
-            document.getElementById('totalExpenseRate' + suffix).textContent = totalExpenseRate;
-            document.getElementById('netProfitRate' + suffix).textContent = netProfitRate;
-            
-            // 지출 상세 표시
-            document.getElementById('totalPointCost' + suffix).textContent = totalPointCost.toLocaleString();
-            document.getElementById('pointCostRate' + suffix).textContent = pointCostRate;
-            document.getElementById('totalTicketCost' + suffix).textContent = totalTicketCost.toLocaleString();
-            document.getElementById('ticketCostRate' + suffix).textContent = ticketCostRate;
-            document.getElementById('totalManagementFee' + suffix).textContent = totalManagementFee.toLocaleString();
-            document.getElementById('managementFeeRate' + suffix).textContent = managementFeeRate;
-            document.getElementById('totalMarketingFee' + suffix).textContent = totalMarketingFee.toLocaleString();
-            document.getElementById('marketingFeeRate' + suffix).textContent = marketingFeeRate;
-            document.getElementById('totalMarketCompensation' + suffix).textContent = totalMarketCompensation.toLocaleString();
-            document.getElementById('marketCompensationRate' + suffix).textContent = marketCompensationRate;
-            document.getElementById('totalAgencyFee' + suffix).textContent = totalAgencyFee.toLocaleString();
-            document.getElementById('agencyFeeRate' + suffix).textContent = agencyFeeRate;
+          // 비율 계산
+          const netProfitRate = totalRevenue ? Math.round((netProfit / totalRevenue) * 100) : 0;
+          const totalExpenseRate = totalRevenue ? Math.round((totalExpenses / totalRevenue) * 100) : 0;
 
-            // 필요 자원 계산 (계산기 2번의 경우 30일로 나누기)
-            const divideByDays = suffix === '2' ? 30 : 1;
-            
-            // 필요 DAU 계산
-            const requiredDau = Math.round(expectedClicks / 4 / divideByDays);
-            document.getElementById('requiredDau' + suffix).textContent = requiredDau.toLocaleString();
+          // 각 항목별 비율 계산
+          const pointCostRate = totalRevenue ? Math.round((totalPointCost / totalRevenue) * 100) : 0;
+          const ticketCostRate = totalRevenue ? Math.round((totalTicketCost / totalRevenue) * 100) : 0;
+          const managementFeeRate = totalRevenue ? Math.round((totalManagementFee / totalRevenue) * 100) : 0;
+          const marketingFeeRate = totalRevenue ? Math.round((totalMarketingFee / totalRevenue) * 100) : 0;
+          const marketCompensationRate = totalRevenue ? Math.round((totalMarketCompensation / totalRevenue) * 100) : 0;
+          const agencyFeeRate = totalRevenue ? Math.round((totalAgencyFee / totalRevenue) * 100) : 0;
 
-            // 필요 유저 계산
-            const requiredUsers = Math.round(expectedClicks * 0.7 / divideByDays);
-            document.getElementById('requiredUsers' + suffix).textContent = requiredUsers.toLocaleString();
+          // 결과 표시
+          document.getElementById('totalRevenue' + suffix).textContent = totalRevenue.toLocaleString();
+          document.getElementById('totalExpenses' + suffix).textContent = totalExpenses.toLocaleString();
+          document.getElementById('netProfit' + suffix).textContent = netProfit.toLocaleString();
+          document.getElementById('totalExpenseRate' + suffix).textContent = totalExpenseRate;
+          document.getElementById('netProfitRate' + suffix).textContent = netProfitRate;
 
-            // 필요 업체수 계산
-            const requiredCompanies = Math.round(expectedClicks / 100 / divideByDays);
-            document.getElementById('requiredCompanies' + suffix).textContent = requiredCompanies.toLocaleString();
+          // 지출 상세 표시
+          document.getElementById('totalPointCost' + suffix).textContent = totalPointCost.toLocaleString();
+          document.getElementById('pointCostRate' + suffix).textContent = pointCostRate;
+          document.getElementById('totalTicketCost' + suffix).textContent = totalTicketCost.toLocaleString();
+          document.getElementById('ticketCostRate' + suffix).textContent = ticketCostRate;
+          document.getElementById('totalManagementFee' + suffix).textContent = totalManagementFee.toLocaleString();
+          document.getElementById('managementFeeRate' + suffix).textContent = managementFeeRate;
+          document.getElementById('totalMarketingFee' + suffix).textContent = totalMarketingFee.toLocaleString();
+          document.getElementById('marketingFeeRate' + suffix).textContent = marketingFeeRate;
+          document.getElementById('totalMarketCompensation' + suffix).textContent = totalMarketCompensation.toLocaleString();
+          document.getElementById('marketCompensationRate' + suffix).textContent = marketCompensationRate;
+          document.getElementById('totalAgencyFee' + suffix).textContent = totalAgencyFee.toLocaleString();
+          document.getElementById('agencyFeeRate' + suffix).textContent = agencyFeeRate;
 
-            // 필요 마케팅 비용 계산
-            const costPerSignup = getNumberValue(document.getElementById('costPerSignup' + suffix));
-            const requiredMarketingBudget = costPerSignup * requiredUsers;
-            document.getElementById('requiredMarketingBudget' + suffix).textContent = requiredMarketingBudget.toLocaleString();
-        }
+          // 필요 자원 계산 (계산기 2번의 경우 30일로 나누기)
+          const divideByDays = suffix === '2' ? 30 : 1;
 
-        // 초기 계산 실행
-        ['1', '2', '3', '4'].forEach(suffix => {
-            calculateAll(suffix);
-        });
+          // 필요 DAU 계산
+          const requiredDau = Math.round(expectedClicks / 4 / divideByDays);
+          document.getElementById('requiredDau' + suffix).textContent = requiredDau.toLocaleString();
+
+          // 필요 유저 계산
+          const requiredUsers = Math.round(expectedClicks * 0.7 / divideByDays);
+          document.getElementById('requiredUsers' + suffix).textContent = requiredUsers.toLocaleString();
+
+          // 필요 업체수 계산
+          const requiredCompanies = Math.round(expectedClicks / 100 / divideByDays);
+          document.getElementById('requiredCompanies' + suffix).textContent = requiredCompanies.toLocaleString();
+
+          // 필요 마케팅 비용 계산
+          const costPerSignup = getNumberValue(document.getElementById('costPerSignup' + suffix));
+          const requiredMarketingBudget = costPerSignup * requiredUsers;
+          document.getElementById('requiredMarketingBudget' + suffix).textContent = requiredMarketingBudget.toLocaleString();
+
+          // 필요 상품수 계산 (계산기 2번의 경우 30일로 나누기)
+          const productPrice = getNumberValue(document.getElementById('productPrice' + suffix));
+          const requiredProducts = productPrice > 0 ?
+              ((totalTicketCost / (suffix === '2' ? 30 : 1)) / productPrice).toFixed(1) : 0;
+          document.getElementById('requiredProducts' + suffix).textContent = Number(requiredProducts).toLocaleString('en-US', {
+              minimumFractionDigits: 1,
+              maximumFractionDigits: 1
+          });
+
+          // 상품당 필요 미션수 계산
+          const missionsPerProduct = requiredProducts > 0 ? Math.round(expectedClicks / Number(requiredProducts)) : 0;
+          document.getElementById('missionsPerProduct' + suffix).textContent = missionsPerProduct.toLocaleString();
+      }
+
+      // 초기 계산 실행
+      ['1', '2', '3', '4'].forEach(suffix => {
+          calculateAll(suffix);
+      });
     </script>
-</body>
-</html> 
+  </body>
+</html>
